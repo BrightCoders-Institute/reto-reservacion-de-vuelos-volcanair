@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1078898194677",
+    "project_id": "volcanair-91fa1",
+    "storage_bucket": "volcanair-91fa1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1078898194677:android:dd7fe17e01df5b245e6dbc",
+        "android_client_info": {
+          "package_name": "com.volcanairapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1078898194677-lgrknu2pogt4f69inep9eh4ehf3bmvfr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXOh7ZmhxMeAe1oGYM7KppSNfhhkAIAzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1078898194677-lgrknu2pogt4f69inep9eh4ehf3bmvfr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
