@@ -29,6 +29,7 @@ const LoginScreen = () => {
       onChangeText={setPassword}
     />
     <Button title="Iniciar sesión" onPress={handleLogin} />
+    <Button title="Iniciar sesión" onPress={handleLogin} />
   </View>
   );
 };
