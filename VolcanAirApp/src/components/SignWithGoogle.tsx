@@ -1,14 +1,9 @@
-import { View, Text } from 'react-native'
-import {
-    GoogleSignin,
-    GoogleSigninButton,
-    statusCodes,
-} from '@react-native-google-signin/google-signin';
-
-import React from 'react'
+import {GoogleSignin,GoogleSigninButton,statusCodes} from '@react-native-google-signin/google-signin';
+import React from 'react';
 GoogleSignin.configure({
-    webClientId: '1078898194677-so5crrvvvi39fbng67ts6hgsbf1pp71l.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
-
+  webClientId: '1078898194677-so5crrvvvi39fbng67ts6hgsbf1pp71l.apps.googleusercontent.com',
+  offlineAccess: true,
+  
 });
 export default function SignWithGoogle() {
     // Somewhere in your code
@@ -22,17 +17,16 @@ export default function SignWithGoogle() {
                 console.log("Canceled: ",error);
                 
             } else if (error.code === statusCodes.IN_PROGRESS) {
-                console.log("progress: ",error);
+                console.log("progress: ",error.code);
                 // operation (e.g. sign in) is in progress already
             } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-                console.log("Not available: ",error);
+                console.log("Not available: ",error.code);
                 // play services not available or outdated
             } else {
-                console.log("Other: ",error);
-                // some other error happened
+                console.log("Other: ",error.code);
+               
             }
-        }
-    };
+          }};
     return (
         <>
             <GoogleSigninButton
@@ -42,5 +36,5 @@ export default function SignWithGoogle() {
             //disabled={this.state.isSigninInProgress}
             />
         </>
-    )
+)
 }

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, TextInput, Button } from 'react-native';
+import React, {useState} from 'react';
+import {View, TextInput, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
@@ -16,12 +16,8 @@ const LoginScreen = () => {
     }
   };
   return (
-    <View>
-    <TextInput
-      placeholder="Correo electrónico"
-      value={email}
-      onChangeText={setEmail}
-    />
+  <View>
+    <TextInput placeholder="Correo electrónico" value={email} onChangeText={setEmail}/>
     <TextInput
       placeholder="Contraseña"
       secureTextEntry
