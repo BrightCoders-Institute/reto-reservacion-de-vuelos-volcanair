@@ -4,14 +4,13 @@ import {
   SafeAreaView, View
 } from 'react-native';
 import SignWithGoogle from './src/components/SignWithGoogle';
-
+import RegisterScreen from './src/components/RegisterScreen';
 function App(): JSX.Element {
 
   return (
     <View>
         <SafeAreaView >
-          <SignWithGoogle/>
-          <LoginScreen/>
+          <RegisterScreen />
       </SafeAreaView>
     </View>
   
