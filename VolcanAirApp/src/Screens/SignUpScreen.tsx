@@ -2,59 +2,50 @@ import {
   View,
   Text,
   Button,
-  TextInput,
+  TouchableOpacity,
   SafeAreaView,
   StyleSheet,
 } from 'react-native';
-import React, {useState} from 'react';
-import {Input} from 'react-native-elements';
-import CheckBox from '@react-native-community/checkbox';
+import React, { useState } from 'react';
+import { Input } from 'react-native-elements';
+import CheckboxTerms from '../components/SignUp/CheckboxTerms';
+import CheckboxSubscribe from '../components/SignUp/CheckboxSubscribe';
+import InputSignUp from '../components/SignUp/InputSignUp';
 
-export default function SignUpScreen({navigation}): JSX.Element {
-  const [username, setUSername] = useState('');
+export default function SignUpScreen({ navigation }): JSX.Element {
+  const [username, setUsername] = useState('');
+  const [userInputError, setUserInputError] = useState('');
   const [email, setEmail] = useState('');
+  const [emailInputError, setEmailInputError] = useState('');
   const [password, setPassword] = useState('');
-  const [agreeTerms, setAgreeTems] = useState(false);
+  const [passInputError, setPassInputError] = useState('');
+
+  const handleSignUp = () => {
+    (username == '') ? setUserInputError("First name is required") : setUserInputError('');
+    (email == '') ? setEmailInputError("Email is required") : setEmailInputError('');
+    (password == '') ? setPassInputError("Password is required") : setPassInputError('');
+  }
 
   return (
     <SafeAreaView style={styles.savScreen}>
       <Text style={styles.txtTitleScreen}>Sign Up</Text>
       <View style={styles.vwFormContainer}>
-        <Text style={styles.txtLabelInput}>First Name</Text>
-        <Input
-          style={styles.input}
-          placeholder="Your name"
-          onChangeText={setUSername}
-        />
-        <Text style={styles.txtLabelInput}>Email*</Text>
-        <Input
-          style={styles.input}
-          placeholder="user@email.com"
-          onChangeText={setEmail}
-        />
-        <Text style={styles.txtLabelInput}>Password*</Text>
-        <Input
-          style={styles.input}
-          placeholder="Password"
-          onChangeText={setPassword}
-          secureTextEntry={true}
-        />
-        <Text style={styles.txtInfoPassword}>
-          Use 8 or more characters with a mix of letters, numbers, and symbols
-        </Text>
+        <InputSignUp setValue={setUsername} errorDescription={userInputError} placeholder='Your name' secureTextEntry={false} label='First name'/>
+        <InputSignUp setValue={setEmail} errorDescription={emailInputError} placeholder='username@domain.com' secureTextEntry={false} label='Email*'/>
+        <InputSignUp setValue={setPassword} errorDescription={passInputError} placeholder='Password' secureTextEntry={true} label='Password*'/>
 
-        <CheckBox
-          disabled={false}
-          value={agreeTerms}
-          onValueChange={() => setAgreeTems(!agreeTerms)}
-          tintColors={{true: "#5C72E5"}}
-        />
+        <CheckboxTerms />
+        <CheckboxSubscribe />
+
       </View>
 
-      <Button
-        title="Go to My Flights"
-        onPress={() => navigation.navigate('MyFlights')}
-      />
+      <View style={styles.btnContainer}>
+        <TouchableOpacity style={styles.btnSignUp} onPress={handleSignUp}>
+          <Text style={styles.txtBtnSignUp}>Sign Up</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.txtOr}>Or</Text>
+      </View>
     </SafeAreaView>
   );
 }
@@ -74,20 +65,32 @@ const styles = StyleSheet.create({
   vwFormContainer: {
     marginTop: 20,
   },
-  txtLabelInput: {
-    fontSize: 18,
-    paddingLeft: 10,
-  },
-  input: {
-    marginTop: 6,
-    borderWidth: 1,
-    borderColor: '#474747',
-    width: '110%',
-  },
   txtInfoPassword: {
     marginTop: -18,
-    fontSize: 14,
+    fontSize: 13,
     marginLeft: 10,
     marginRight: 10,
   },
+  btnContainer: {
+    marginTop: 30,
+    display: 'flex',
+    alignContent: 'center',
+    alignItems: 'center'
+  },
+  btnSignUp: {
+    alignItems: 'center',
+    backgroundColor: '#5979F0',
+    padding: 10,
+    borderRadius: 10,
+    width: '90%',
+  },
+  txtBtnSignUp: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  txtOr: {
+    marginTop: 25,
+    fontSize: 16
+  }
 });
