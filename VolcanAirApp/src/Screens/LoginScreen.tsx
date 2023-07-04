@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 import {View, TextInput, Button} from 'react-native';
 import auth from '@react-native-firebase/auth';
-const LoginScreen = () => {
+function LoginScreen ({ navigation }):JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  
   const handleLogin = async () => {
     try {
       const userCredential = await auth().signInWithEmailAndPassword(email, password);
       const user = userCredential.user;
       console.log(user);
       console.log('Inicio de sesión exitoso', user.uid);
+      navigation.navigate('MyFlights');
     } catch (error) {
       console.error('Error al iniciar sesión', error);
     }

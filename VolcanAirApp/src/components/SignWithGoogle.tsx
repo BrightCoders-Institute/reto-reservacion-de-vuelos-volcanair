@@ -12,6 +12,8 @@ export default function SignWithGoogle() {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
             console.log(userInfo);
+            
+
         } catch (error: any) {
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 console.log("Canceled: ",error);
