@@ -1,21 +1,20 @@
 import { View, Text, StyleSheet } from 'react-native'
-import React, { useState } from 'react';
+import React, { useState, Dispatch } from 'react';
 import CheckBox from '@react-native-community/checkbox';
 
-// type checkBoxConfirm = {
-//     text: string
-// }
+type checkBoxConfirm = {
+    value: boolean;
+    setValue: Dispatch
+}
 
 
-export default function CheckboxTerms(): JSX.Element {
-    const [agreeTerms, setAgreeTems] = useState(false);
-
+export default function CheckboxTerms({value, setValue}: checkBoxConfirm): JSX.Element {
     return (
         <View style={styles.checkBoxContainer}>
             <CheckBox
                 disabled={false}
-                value={agreeTerms}
-                onValueChange={() => setAgreeTems(!agreeTerms)}
+                value={value}
+                onValueChange={() => setValue(!value)}
                 tintColors={{ true: "#5C72E5" }}
             />
             <Text>I agree to the <Text style={styles.underline}>Terms</Text> and <Text style={styles.underline}>Privacy Policy.</Text> <Text style={styles.asteristik}>*</Text></Text>

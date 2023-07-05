@@ -5,12 +5,13 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StyleSheet,
+  Alert
 } from 'react-native';
-import React, { useState } from 'react';
-import { Input } from 'react-native-elements';
+import React, { useState, useEffect } from 'react';
 import CheckboxTerms from '../components/SignUp/CheckboxTerms';
 import CheckboxSubscribe from '../components/SignUp/CheckboxSubscribe';
 import InputSignUp from '../components/SignUp/InputSignUp';
+import { validateEmail, validatePassword, validateUsername } from '../../helpers/inputValidator';
 
 export default function SignUpScreen({ navigation }): JSX.Element {
   const [username, setUsername] = useState('');
@@ -19,11 +20,28 @@ export default function SignUpScreen({ navigation }): JSX.Element {
   const [emailInputError, setEmailInputError] = useState('');
   const [password, setPassword] = useState('');
   const [passInputError, setPassInputError] = useState('');
+  const [agreeTerms, setAgreeTems] = useState(false);
+  const [agreeSubscription, setAgreeSubscription] = useState(false);
+  const [btnDisable, setBtnDisable] = useState(true);
+
+  const inputValidator = ()=>{
+    if(validateUsername(username, setUserInputError) && validateEmail(email, setEmailInputError) && validatePassword(password, setPassInputError) && agreeTerms && agreeSubscription)
+      setBtnDisable(false);
+    else
+      setBtnDisable(true);
+  }
+
+  useEffect(() => {
+    inputValidator();
+  
+    return () => {
+      
+    }
+  }, [username, email, password,agreeTerms, agreeSubscription])
+  
 
   const handleSignUp = () => {
-    (username == '') ? setUserInputError("First name is required") : setUserInputError('');
-    (email == '') ? setEmailInputError("Email is required") : setEmailInputError('');
-    (password == '') ? setPassInputError("Password is required") : setPassInputError('');
+    Alert.alert("Successfuylly", "You can sign up with us")
   }
 
   return (
@@ -34,13 +52,13 @@ export default function SignUpScreen({ navigation }): JSX.Element {
         <InputSignUp setValue={setEmail} errorDescription={emailInputError} placeholder='username@domain.com' secureTextEntry={false} label='Email*'/>
         <InputSignUp setValue={setPassword} errorDescription={passInputError} placeholder='Password' secureTextEntry={true} label='Password*'/>
 
-        <CheckboxTerms />
-        <CheckboxSubscribe />
+        <CheckboxTerms value={agreeTerms} setValue={setAgreeTems}/>
+        <CheckboxSubscribe value={agreeSubscription} setValue={setAgreeSubscription}/>
 
       </View>
 
       <View style={styles.btnContainer}>
-        <TouchableOpacity style={styles.btnSignUp} onPress={handleSignUp}>
+        <TouchableOpacity style={[styles.btnSignUp, {backgroundColor: (btnDisable)?"#9EA4A9":"#5979F0"}]} onPress={handleSignUp} disabled={btnDisable}>
           <Text style={styles.txtBtnSignUp}>Sign Up</Text>
         </TouchableOpacity>
 
@@ -79,7 +97,6 @@ const styles = StyleSheet.create({
   },
   btnSignUp: {
     alignItems: 'center',
-    backgroundColor: '#5979F0',
     padding: 10,
     borderRadius: 10,
     width: '90%',
