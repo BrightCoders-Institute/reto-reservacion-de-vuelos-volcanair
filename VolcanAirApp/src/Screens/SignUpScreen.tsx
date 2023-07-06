@@ -12,6 +12,7 @@ import CheckboxTerms from '../components/SignUp/CheckboxTerms';
 import CheckboxSubscribe from '../components/SignUp/CheckboxSubscribe';
 import InputSignUp from '../components/SignUp/InputSignUp';
 import { validateEmail, validatePassword, validateUsername } from '../../helpers/inputValidator';
+import { userExist } from '../Queries/RegisterQueries';
 
 export default function SignUpScreen({ navigation }): JSX.Element {
   const [username, setUsername] = useState('');
@@ -40,8 +41,13 @@ export default function SignUpScreen({ navigation }): JSX.Element {
   }, [username, email, password,agreeTerms, agreeSubscription])
   
 
-  const handleSignUp = () => {
-    Alert.alert("Successfuylly", "You can sign up with us")
+  const handleSignUp = async () => {
+    let exist = await userExist(email, password, username);
+    console.log("Existe?",exist);
+    if(exist)
+      Alert.alert("This account already exists", "Please Sign In");
+    else 
+      Alert.alert("Account Created Succesfully", "Now, you can Sign In with your email and password");
   }
 
   return (

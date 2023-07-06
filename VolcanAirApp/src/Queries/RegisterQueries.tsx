@@ -1,32 +1,51 @@
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
-export const userExist = (email:any, password:any, nombre:any) => {
-  firestore()
+export const userExist = async (email:string, password:string, nombre:string) => {
+   let userData = await firestore()
     .collection('users')
-    .where('mail', '==', email)
+    .where('email', '==', email)
     .get()
     .then(querySnapshot => {
-      if (!querySnapshot.empty) {
-        console.log('Este correo ya está registrado');
-        
-      } else {
-        console.log('Este correo no está registrado');
-        registerMailFireBase(email,password, nombre);
+      console.log(querySnapshot.docs);
+      
+      if(querySnapshot.docs.length>0){
+          console.log('Este correo ya está registrado');
+          return true;
+      }else{
+          return false;
       }
     })
     .catch(error => {
       console.log('Error al realizar la consulta:', error);     
     });
+
+    console.log(userData);
+    
+    if(userData){
+      return true;
+    }
+    else{
+      await registerMailFireBase(email,password, nombre);
+      return false;
+    }
+    // if (JSON.parse(userData)>0) {
+    //   console.log('Este correo ya está registrado');
+    //   return querySnapshot.docs;
+    // } else {
+    //   console.log('Este correo no está registrado');
+    //   
+    //   return querySnapshot.docs;
+    // }
 }
 
 
-const registerMailFireBase=(email:any, password:any, nombre:any)=>{
-  auth()
+const registerMailFireBase=async (email:string, password:string, nombre:string)=>{
+  await auth()
   .createUserWithEmailAndPassword(email, password)
   .then(() => {
+    register(nombre,email,password);
     console.log('Usuario creado!');
-    register(nombre,password);
   })
   .catch(error => {
     if (error.code === 'auth/email-already-in-use') {
@@ -40,9 +59,11 @@ const registerMailFireBase=(email:any, password:any, nombre:any)=>{
     console.error(error);
   });
 }
-const register =(nombre:any, password:any)=>{    
+
+const register =(nombre:string, email: string, password:string)=>{    
   firestore().collection('users').add({
     name: nombre,
+    email: email,
     password: password,
   })
   .then(() => {
