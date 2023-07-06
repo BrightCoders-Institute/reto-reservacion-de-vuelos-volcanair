@@ -9,7 +9,6 @@ export default function BookingScreen({ navigation }):JSX.Element {
   // Handle user state changes
   function onAuthStateChanged(user:any) {
     setUser(user);
-    console.log(user);
     if (initializing) setInitializing(false);
   }
   useEffect(() => {
@@ -20,7 +19,7 @@ export default function BookingScreen({ navigation }):JSX.Element {
   if (initializing) return null;
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text style={{color:'black'}}>Welcome {user.email}</Text>
+      <Text>BookingScreen</Text>
       <Button title='Go to My Flights' onPress={() => navigation.navigate('MyFlights')} />
     </View>
   )
