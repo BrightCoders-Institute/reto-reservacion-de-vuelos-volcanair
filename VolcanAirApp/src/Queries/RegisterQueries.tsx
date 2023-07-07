@@ -1,50 +1,33 @@
+import {Alert} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
-export const userExist = async (email:string, password:string, nombre:string) => {
-   let userData = await firestore()
+
+export const userExist = async (email:string, password:string, nombre:string, signWithGoogle: boolean) => {
+    await firestore()
     .collection('users')
     .where('email', '==', email)
     .get()
-    .then(querySnapshot => {
-      console.log(querySnapshot.docs);
-      
+    .then(async (querySnapshot) => {
       if(querySnapshot.docs.length>0){
-          console.log('Este correo ya está registrado');
-          return true;
+        console.log('Este correo ya está registrado');
+        Alert.alert("This account already exists", "Please Sign In");
       }else{
-          return false;
+        await registerMailFireBase(email,password, nombre, signWithGoogle);
+        Alert.alert("Account Created Succesfully", "Now, you can Sign In with your email and password");
       }
     })
     .catch(error => {
       console.log('Error al realizar la consulta:', error);     
     });
-
-    console.log(userData);
-    
-    if(userData){
-      return true;
-    }
-    else{
-      await registerMailFireBase(email,password, nombre);
-      return false;
-    }
-    // if (JSON.parse(userData)>0) {
-    //   console.log('Este correo ya está registrado');
-    //   return querySnapshot.docs;
-    // } else {
-    //   console.log('Este correo no está registrado');
-    //   
-    //   return querySnapshot.docs;
-    // }
 }
 
 
-const registerMailFireBase=async (email:string, password:string, nombre:string)=>{
+const registerMailFireBase=async (email:string, password:string, nombre:string, signWithGoogle: boolean)=>{
   await auth()
   .createUserWithEmailAndPassword(email, password)
   .then(() => {
-    register(nombre,email,password);
+    register(nombre,email,password, signWithGoogle);
     console.log('Usuario creado!');
   })
   .catch(error => {
@@ -60,11 +43,12 @@ const registerMailFireBase=async (email:string, password:string, nombre:string)=
   });
 }
 
-const register =(nombre:string, email: string, password:string)=>{    
+const register =(nombre:string, email: string, password:string, signWithGoogle: boolean)=>{    
   firestore().collection('users').add({
     name: nombre,
     email: email,
     password: password,
+    signWithGoogle: signWithGoogle
   })
   .then(() => {
     console.log('User added!');

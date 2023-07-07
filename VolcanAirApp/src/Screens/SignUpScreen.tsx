@@ -13,6 +13,8 @@ import CheckboxSubscribe from '../components/SignUp/CheckboxSubscribe';
 import InputSignUp from '../components/SignUp/InputSignUp';
 import { validateEmail, validatePassword, validateUsername } from '../../helpers/inputValidator';
 import { userExist } from '../Queries/RegisterQueries';
+import SignWithGoogle from '../components/SignWithGoogle';
+
 
 export default function SignUpScreen({ navigation }): JSX.Element {
   const [username, setUsername] = useState('');
@@ -24,6 +26,7 @@ export default function SignUpScreen({ navigation }): JSX.Element {
   const [agreeTerms, setAgreeTems] = useState(false);
   const [agreeSubscription, setAgreeSubscription] = useState(false);
   const [btnDisable, setBtnDisable] = useState(true);
+  const [btnGoogleDisabled, setBtnGoogleDisabled] = useState(true);
 
   const inputValidator = ()=>{
     if(validateUsername(username, setUserInputError) && validateEmail(email, setEmailInputError) && validatePassword(password, setPassInputError) && agreeTerms && agreeSubscription)
@@ -32,8 +35,16 @@ export default function SignUpScreen({ navigation }): JSX.Element {
       setBtnDisable(true);
   }
 
+  const inputGoogleValidator= ()=>{
+    if(agreeTerms && agreeSubscription)
+      setBtnGoogleDisabled(false);
+    else
+      setBtnGoogleDisabled(true);
+  }
+
   useEffect(() => {
     inputValidator();
+    inputGoogleValidator();
   
     return () => {
       
@@ -42,12 +53,7 @@ export default function SignUpScreen({ navigation }): JSX.Element {
   
 
   const handleSignUp = async () => {
-    let exist = await userExist(email, password, username);
-    console.log("Existe?",exist);
-    if(exist)
-      Alert.alert("This account already exists", "Please Sign In");
-    else 
-      Alert.alert("Account Created Succesfully", "Now, you can Sign In with your email and password");
+    await userExist(email, password, username, false);
   }
 
   return (
@@ -69,6 +75,8 @@ export default function SignUpScreen({ navigation }): JSX.Element {
         </TouchableOpacity>
 
         <Text style={styles.txtOr}>Or</Text>
+
+        <SignWithGoogle disable={btnGoogleDisabled}/>
       </View>
     </SafeAreaView>
   );
