@@ -15,14 +15,14 @@ function App(): JSX.Element {
   return (
       <AuthProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='SignUp'>
-            <Stack.Screen name='LoginScreen' component={LoginScreens} options={{title:"Signup"}}/>
-            <Stack.Screen name='MyFlights' component={MyFlights} options={{title:"My Flights"}}/>
-            <Stack.Screen name='signup' component={SignUpScreen} options={{title:"singup"}}/>
+          <Stack.Navigator initialRouteName='Login'>
+            <Stack.Screen name='Login' component={LoginScreens} options={{headerShown: false}} />
+            <Stack.Screen name='MyFlights' component={MyFlights} options={{headerShown: false}}/>
+            <Stack.Screen name='Booking' component={BookingScreen} options={{headerShown: false}}/>
+            <Stack.Screen name='SignUp' component={SignUpScreen} options={{headerShown: false}}/>
           </Stack.Navigator>
         </NavigationContainer>   
       </AuthProvider>
-
   );
 }
 

@@ -23,6 +23,7 @@ export default function InputSignUp({ setValue, errorDescription, placeholder, s
                     fontSize: 16,
                     fontFamily: 'arial',
                     fontWeight: 'normal',
+                    color: '#040F0F'
                 }}
                 secureTextEntry= {secureTextEntry}
             />
