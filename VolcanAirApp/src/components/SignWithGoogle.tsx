@@ -18,7 +18,7 @@ export default function SignWithGoogle({disable}: propsSignWithGoogle): JSX.Elem
             await GoogleSignin.hasPlayServices();
             const {user} = await GoogleSignin.signIn();
             let username = String(user.name);
-            await userExist(user.email, username, username, true);
+            await userExist(user.email, user.email, username, true);
         } catch (error: any) {
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 console.log("Canceled: ",error);

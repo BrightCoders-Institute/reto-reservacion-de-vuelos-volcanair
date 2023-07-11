@@ -15,7 +15,7 @@ function App(): JSX.Element {
   return (
       <AuthProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName='Login'>
+          <Stack.Navigator initialRouteName='SignUp'>
             <Stack.Screen name='Login' component={LoginScreens} options={{headerShown: false}} />
             <Stack.Screen name='MyFlights' component={MyFlights} options={{headerShown: false}}/>
             <Stack.Screen name='Booking' component={BookingScreen} options={{headerShown: false}}/>

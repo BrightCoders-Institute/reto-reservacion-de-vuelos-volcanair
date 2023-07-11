@@ -56,6 +56,10 @@ export default function SignUpScreen({ navigation }): JSX.Element {
     await userExist(email, password, username, false);
   }
 
+  const goToLogin= ()=>{
+    navigation.navigate("Login");
+  }
+
   return (
     <SafeAreaView style={styles.savScreen}>
       <Text style={styles.txtTitleScreen}>Sign Up</Text>
@@ -77,6 +81,8 @@ export default function SignUpScreen({ navigation }): JSX.Element {
         <Text style={styles.txtOr}>Or</Text>
 
         <SignWithGoogle disable={btnGoogleDisabled}/>
+
+        <Text style={styles.txtQuestion}>Already have an account? <Text style={styles.txtLogin} onPress={goToLogin}>Log in</Text></Text>
       </View>
     </SafeAreaView>
   );
@@ -123,5 +129,13 @@ const styles = StyleSheet.create({
   txtOr: {
     marginTop: 25,
     fontSize: 16
+  },
+  txtQuestion:{
+    marginTop: 20,
+    fontSize: 18
+  },
+  txtLogin: {
+    color: "blue",
+    textDecorationLine: 'underline'
   }
 });

@@ -42,6 +42,8 @@ export default function LoginScreen({ navigation }: LoginScreenProps): JSX.Eleme
     try {
       const userCredential = await auth().signInWithEmailAndPassword(email, password);
       const user = userCredential.user;  
+      console.log(user);
+      
       navigation.navigate('MyFlights');
     } catch (error) {
       console.error('Error al iniciar sesión', error);
@@ -65,8 +67,8 @@ export default function LoginScreen({ navigation }: LoginScreenProps): JSX.Eleme
       <InputSignUp setValue={setPassword} errorDescription={passInputError} placeholder='password' secureTextEntry={true} label='Password:'/>
       </View>
       <View style={styles.btnContainer}>
-        <TouchableOpacity style={[styles.btnSignIn, {backgroundColor: (btnDisable)?"#9EA4A9":"#5979F0"}]} disabled={btnDisable}>
-            <Text style={styles.txtBtnSignIn}>Sign Up</Text>
+        <TouchableOpacity style={[styles.btnSignIn, {backgroundColor: (btnDisable)?"#9EA4A9":"#5979F0"}]} disabled={btnDisable} onPress={handleLogin}>
+            <Text style={styles.txtBtnSignIn}>Sign In</Text>
           </TouchableOpacity>
 
           <Text style={styles.txtOr}>Or</Text>
