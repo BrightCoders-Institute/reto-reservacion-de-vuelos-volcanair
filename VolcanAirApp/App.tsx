@@ -14,11 +14,11 @@ const Stack= createNativeStackNavigator();
 function App(): JSX.Element {
   return (
       <AuthProvider>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName='SignUp'>
-            <Stack.Screen name='LoginScreen' component={LoginScreens} options={{title:"Signup"}}/>
-            <Stack.Screen name='MyFlights' component={MyFlights} options={{title:"My Flights"}}/>
-            <Stack.Screen name='signup' component={SignUpScreen} options={{title:"singup"}}/>
+        <NavigationContainer >
+          <Stack.Navigator initialRouteName='SignUp' screenOptions={{ headerShown: false }}>
+            <Stack.Screen name='LoginScreen' component={LoginScreens} options={{ title: "Signup" }} />
+            <Stack.Screen name='MyFlights' component={MyFlights} options={{ title: "My Flights" }} />
+            <Stack.Screen name='signup' component={SignUpScreen} options={{ title: "signup" }} />
           </Stack.Navigator>
         </NavigationContainer>   
       </AuthProvider>
