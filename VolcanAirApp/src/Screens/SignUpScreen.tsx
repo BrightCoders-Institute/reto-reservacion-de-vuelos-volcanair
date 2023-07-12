@@ -80,7 +80,7 @@ export default function SignUpScreen({ navigation }): JSX.Element {
 
         <Text style={styles.txtOr}>Or</Text>
 
-        <SignWithGoogle disable={btnGoogleDisabled}/>
+        <SignWithGoogle disable={btnGoogleDisabled} navigation={navigation}/>
 
         <Text style={styles.txtQuestion}>Already have an account? <Text style={styles.txtLogin} onPress={goToLogin}>Log in</Text></Text>
       </View>

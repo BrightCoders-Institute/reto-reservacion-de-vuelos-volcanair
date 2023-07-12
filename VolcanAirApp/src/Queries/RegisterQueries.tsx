@@ -1,20 +1,21 @@
 import {Alert} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import { Dispatch } from 'react';
 
 
-export const userExist = async (email:string, password:string, nombre:string, signWithGoogle: boolean) => {
+export const userExist = async (email:string, password:string, nombre:string, signWithGoogle: boolean, navigator: Dispatch) => {
     await firestore()
     .collection('users')
     .where('email', '==', email)
     .get()
     .then(async (querySnapshot) => {
       if(querySnapshot.docs.length>0){
-        console.log('Este correo ya está registrado');
-        Alert.alert("This account already exists", "Please Sign In");
+        navigator.navigate("MyFlights");
       }else{
         await registerMailFireBase(email,password, nombre, signWithGoogle);
-        Alert.alert("Account Created Succesfully", "Now, you can Sign In with your email and password");
+        Alert.alert("Account Created Succesfully", "Now, you can Sign In with your Google account");
+        navigator.navigate("MyFlights");
       }
     })
     .catch(error => {
