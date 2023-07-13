@@ -1,18 +1,24 @@
-import React,{useContext} from 'react'
-import { View, FlatList, Text } from 'react-native'
+import React, { useContext, useState } from 'react'
+import { View, FlatList, Text, Pressable } from 'react-native'
 import myFlightsQueries from '../../Queries/MyFligths/myFlightsQueries';
 import { AuthContext } from '../AuthContex';
 import { styleMyFligths } from './styleMyFligths';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
+import FlightItem from './FlightItem';
 
 
 const componentsMyFligths = () => {
-  const icon = <FontAwesome5 name={'plane'} color={"#5c6df8"} size={20} style={{textAlign:'center'}}/>; 
-
-
-  const {user} = useContext(AuthContext);
-  const userData: any[] = myFlightsQueries();
+  const { user } = useContext(AuthContext);
+  const [flightList, setFlightList] = useState([])
+  console.log("Email user", user?.email);
   
+  const getData = async ()=>{
+    await myFlightsQueries(user.email, setFlightList);
+    console.log(flightList);
+    
+    // let data: any[]= myFlightsQueries();
+    // console.log(data);  
+  }
   const formatDate = (timestamp: any) => {
     const date = timestamp.toDate();
     const day = date.getDate();
@@ -21,40 +27,26 @@ const componentsMyFligths = () => {
     // Formatear la fecha como una cadena escrita
     return `${day} de ${month} de ${year}`;
   };
-  const itemRender =({ item }) =>{
-    return(
-      <View  style={styleMyFligths.ContainerFLatList}>
-        {item.flight_reservations.map((reservation, index) => (
-          <View key={index}>
-            <View style={styleMyFligths.names}>
-              <Text style={styleMyFligths.originCity}>{reservation.origin_city?.Code}</Text>
-              <View style={styleMyFligths.icon}>{icon}</View>
-              <Text style={styleMyFligths.codeReservation}>{reservation.destination_city?.code}</Text>
-            </View>
-            <View style={styleMyFligths.lineTransparent}>
-              <View style={styleMyFligths.containetNames}>
-                <Text style={styleMyFligths.originName}>{reservation.origin_city?.name}</Text>
-                <Text style={styleMyFligths.destinityName}>{reservation.destination_city?.name}</Text>
-              </View>
-            </View>
-            <View style={styleMyFligths.lineaBlack}>
-              <View style={styleMyFligths.containertLineaBLack}>
-                <Text style={styleMyFligths.date}>{formatDate(reservation.date)}</Text>
-                <Text style={styleMyFligths.passengers}>{reservation.no_passengers} passengers</Text>
-              </View>
-            </View>
-          </View>
-        ))}
-      </View>
-    )
-  }
+
+  const data = [{ flight: "primer vuelo" }, { flight: "segundo vuelo" }]
+
   return (
-    
-    <FlatList
-      data={userData}
-      keyExtractor={(item) => item.id}
-      renderItem={itemRender} 
-  />
+    <>
+      <FlatList
+        data={flightList}
+        renderItem={({ item }) => <FlightItem flight={item} />
+        }
+      />
+
+      <Pressable onPress={getData}>
+        <Text>Get Data</Text>
+      </Pressable>
+    </>
+    // <FlatList
+    //   data={userData}
+    //   keyExtractor={(item) => item.id}
+    //   renderItem={itemRender} />
+
   )
 }
 
