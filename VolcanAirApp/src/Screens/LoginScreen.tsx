@@ -68,11 +68,7 @@ export default function LoginScreen({ navigation }: LoginScreenProps): JSX.Eleme
       <View style={styles.btnContainer}>
         <TouchableOpacity style={[styles.btnSignIn, {backgroundColor: (btnDisable)?"#9EA4A9":"#5979F0"}]} disabled={btnDisable} onPress={handleLogin}>
             <Text style={styles.txtBtnSignIn}>Sign In</Text>
-          </TouchableOpacity>
-
-          <Text style={styles.txtOr}>Or</Text>
-
-          <SignWithGoogle disable={false} navigation={navigation}/>
+        </TouchableOpacity>
       </View>
 
     </SafeAreaView>
