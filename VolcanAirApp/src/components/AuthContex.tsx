@@ -2,9 +2,6 @@ import React, { createContext, useEffect, useState, ReactNode } from 'react';
 import auth from '@react-native-firebase/auth';
 
 type User = {
-  // Define la estructura de información del usuario que deseas almacenar
-  // Puede incluir campos como nombre, correo electrónico, etc.
-  // Por ejemplo:
   name: string;
   email: string;
 };
@@ -39,7 +36,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser(null);
       }
     });
-
     // Se debe limpiar el event listener al desmontar el componente
     return unsubscribe;
   }, []);
