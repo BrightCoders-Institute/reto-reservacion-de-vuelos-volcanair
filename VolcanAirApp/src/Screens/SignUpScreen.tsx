@@ -14,6 +14,8 @@ import InputSignUp from '../components/SignUp/InputSignUp';
 import { validateEmail, validatePassword, validateUsername } from '../../helpers/inputValidator';
 import { userExist } from '../Queries/RegisterQueries';
 import SignWithGoogle from '../components/SignWithGoogle';
+import { StyleSignUpScreen as styles } from '../styles/Screens/StyleSignUp';
+
 
 
 export default function SignUpScreen({ navigation }): JSX.Element {
@@ -53,7 +55,7 @@ export default function SignUpScreen({ navigation }): JSX.Element {
   
 
   const handleSignUp = async () => {
-    await userExist(email, password, username, false);
+    await userExist(email, password, username, false, navigation);
   }
 
   const goToLogin= ()=>{
@@ -62,7 +64,7 @@ export default function SignUpScreen({ navigation }): JSX.Element {
 
   return (
     <SafeAreaView style={styles.savScreen}>
-      <Text style={styles.txtTitleScreen}>Sign Up</Text>
+      <Text style={styles.txtTitleScreen}>Sign up</Text>
       <View style={styles.vwFormContainer}>
         <InputSignUp setValue={setUsername} errorDescription={userInputError} placeholder='Your name' secureTextEntry={false} label='First name'/>
         <InputSignUp setValue={setEmail} errorDescription={emailInputError} placeholder='username@domain.com' secureTextEntry={false} label='Email*'/>
@@ -87,55 +89,3 @@ export default function SignUpScreen({ navigation }): JSX.Element {
     </SafeAreaView>
   );
 }
-//536CE6
-const styles = StyleSheet.create({
-  savScreen: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: 'white',
-  },
-  txtTitleScreen: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#5C72E5',
-    paddingLeft: 10,
-  },
-  vwFormContainer: {
-    marginTop: 20,
-  },
-  txtInfoPassword: {
-    marginTop: -18,
-    fontSize: 13,
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  btnContainer: {
-    marginTop: 30,
-    display: 'flex',
-    alignContent: 'center',
-    alignItems: 'center'
-  },
-  btnSignUp: {
-    alignItems: 'center',
-    padding: 10,
-    borderRadius: 10,
-    width: '90%',
-  },
-  txtBtnSignUp: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold'
-  },
-  txtOr: {
-    marginTop: 25,
-    fontSize: 16
-  },
-  txtQuestion:{
-    marginTop: 20,
-    fontSize: 18
-  },
-  txtLogin: {
-    color: "blue",
-    textDecorationLine: 'underline'
-  }
-});

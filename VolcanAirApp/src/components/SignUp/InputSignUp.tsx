@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React, { Dispatch } from 'react';
 import { Input } from 'react-native-elements';
+import { StyleInputSignUp as styles } from '../../styles/Components/SignUp/StyleInputSignUp';
+
 
 type FirstNameInput = {
     setValue: Dispatch,
@@ -30,12 +32,3 @@ export default function InputSignUp({ setValue, errorDescription, placeholder, s
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    input: {
-        marginTop: 2,
-        borderWidth: 0.8,
-        borderColor: '#474747',
-        width: '110%',
-    },
-});

@@ -40,14 +40,14 @@ export const styleMyFligths = StyleSheet.create({
   },
   destinityName:{
     flex:1,
-    color:'rgba(0, 0, 0, 0.1)',
-    fontSize:10,
+    color:'rgba(0, 0, 0, 0.7)',
+    fontSize:12,
     textAlign:'right',
   },
   originName:{
     flex:1,
-    color:'rgba(0, 0, 0, 0.1)',
-    fontSize:10,
+    color:'rgba(0, 0, 0, 0.7)',
+    fontSize:12,
     textAlign:'left',
   },
   //Fin de nombres
@@ -80,7 +80,7 @@ export const styleMyFligths = StyleSheet.create({
   //FIn de estos datos
   ContainerFLatList:{
     paddingTop:20,
-    paddingHorizontal:30,
+    paddingHorizontal:20,
     paddingBottom:20,
   },
 

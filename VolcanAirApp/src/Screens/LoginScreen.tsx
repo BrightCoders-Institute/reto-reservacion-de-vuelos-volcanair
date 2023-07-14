@@ -4,8 +4,8 @@ import auth from '@react-native-firebase/auth';
 import { NavigationProp } from '@react-navigation/native';
 import InputSignUp from '../components/SignUp/InputSignUp';
 import { validateEmail, validatePassword } from '../../helpers/inputValidator';
-import SignWithGoogle from '../components/SignWithGoogle';
-import LogInGoogle from '../components/SignIn/LogInGoogle';
+import { StyleSignInScreen as styles } from '../styles/Screens/StyleSignIn';
+
 type RootStackParamList = {
   // Define tus nombres de pantalla y sus respectivos parámetros aquí
   MyFlights: undefined;
@@ -33,7 +33,8 @@ export default function LoginScreen({ navigation }: LoginScreenProps): JSX.Eleme
   }, [email, password])
 
   const inputValidator = ()=>{
-    if(validateEmail(email, setEmailInputError) && validatePassword(password, setPassInputError))
+    //validatePassword(password, setPassInputError)
+    if(validateEmail(email, setEmailInputError)  && validatePassword(password, setPassInputError))
       setBtnDisable(false);
     else
       setBtnDisable(true);
@@ -75,41 +76,3 @@ export default function LoginScreen({ navigation }: LoginScreenProps): JSX.Eleme
   );
 };
 
-const styles = StyleSheet.create({
-  savScreen: {
-    flex: 1,
-    padding: 10,
-    backgroundColor: 'white',
-  },
-  txtTitleScreen: {
-    marginTop: 20,
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#5C72E5',
-    paddingLeft: 10,
-  },
-  vwFormContainer: {
-    marginTop: 40,
-  },
-  btnContainer: {
-    marginTop: 30,
-    display: 'flex',
-    alignContent: 'center',
-    alignItems: 'center'
-  },
-  btnSignIn: {
-    alignItems: 'center',
-    padding: 10,
-    borderRadius: 10,
-    width: '90%',
-  },
-  txtBtnSignIn: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold'
-  },
-  txtOr: {
-    marginTop: 25,
-    fontSize: 16
-  }
-})

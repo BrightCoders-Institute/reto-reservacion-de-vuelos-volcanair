@@ -1,6 +1,8 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useState, Dispatch } from 'react';
 import CheckBox from '@react-native-community/checkbox';
+import { StyleCheckBoxSubscribe as styles } from '../../styles/Components/SignUp/StyleCheckBoxSubs';
+
 
 type checkBoxSubscription = {
     value: boolean;
@@ -23,13 +25,3 @@ export default function CheckboxSubscribe({value, setValue}: checkBoxSubscriptio
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    checkBoxContainer: {
-        marginTop: 4,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginLeft: 5
-    },
-});

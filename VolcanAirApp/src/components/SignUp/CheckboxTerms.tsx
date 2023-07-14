@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native'
 import React, { useState, Dispatch } from 'react';
 import CheckBox from '@react-native-community/checkbox';
+import { StyleCheckBoxTerms as styles } from '../../styles/Components/SignUp/StyleCheckBoxTerms';
 
 type checkBoxConfirm = {
     value: boolean;
@@ -21,20 +22,3 @@ export default function CheckboxTerms({value, setValue}: checkBoxConfirm): JSX.E
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    checkBoxContainer: {
-        marginTop: 4,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginLeft: 5
-    },
-    underline: {
-        textDecorationLine: 'underline',
-    },
-    asteristik: {
-        color: 'red',
-    }
-
-});
