@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import styles from './Styles';
 import NumberDropDown from './Pasajeros/NumberDropDown';
 import Destino from './Destino/Destino';
+import { PassengersSelector } from './Pasajeros/PassengersSelector';
 
 export default function Pantalla4({navigation, setCurrentScreen}): JSX.Element {
   return (
@@ -11,7 +12,7 @@ export default function Pantalla4({navigation, setCurrentScreen}): JSX.Element {
       <Text style={styles.text}>How many passengers?</Text>
       <View style={styles.tamano}>
       
-      <NumberDropDown />
+      <PassengersSelector />
       </View>
       <View >
         <TouchableOpacity
