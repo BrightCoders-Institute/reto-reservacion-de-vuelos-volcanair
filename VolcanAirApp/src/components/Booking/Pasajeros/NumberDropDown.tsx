@@ -1,54 +1,87 @@
-import React, { useState } from 'react';
-import { View, FlatList, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, FlatList, TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native';
 import MyIcon from './Arrow';
 
 
 const NumberList = () => {
-  const [selectedNumber, setSelectedNumber] = useState(null);
+  const [selectedNumber, setSelectedNumber] = useState(0);
+  const flatListRef = useRef(null);
+  const ITEM_HEIGHT = 20;
+  const windowWidth = Dimensions.get('window').width;
+  const data = Array.from({ length: 50 }, (_, index) => index);
 
-  const numbers = [
-    { id: 1, value: '1' },
-    { id: 2, value: '2' },
-    { id: 3, value: '3' },
-    { id: 4, value: '4' },
-    { id: 5, value: '5' },
-    { id: 6, value: '6' },
-    // Agrega más objetos con números según tus necesidades
-  ];
-
-  const handleNumberPress = (number) => {
+  const handleNumberSelect = (number) => {
     setSelectedNumber(number);
   };
 
+  const handlePrevNumber = () => {
+    const prevNumber = selectedNumber - 1>= 0 ? selectdNumber - 1 : 0;
+    setSelectedNumber(prevNumber);
+    scrollToSelectedNumber(prevNumber);
+  }
+  const handleNectNumber = () => {
+    const nextNumber = selectedNumber + 1 <= 50 ? selectedNumber + 1 : 50;
+    setSelectedNumber(nextNumber);
+    scrollToSelectedNumber(nextNumber);
+  }
+  const scrollToSelectedNumber = (number) => {
+    flatListRef.current.scrollToIndex({
+      index: number,
+      animated: true,
+      viewOffset: 0.5 * Dimensions.get('window').height,
+    });
+  };
+
   const renderItem = ({ item }) => {
+    const itemStyle = {
+      textAlign: 'center',
+      fontSize: 24,
+      fontWeight: item === selectedNumber ? 'bold' : 'normal',
+      color: item === selectedNumber ? 'blue' : 'black',
+    };
     return (
-      <TouchableOpacity
-        style={[styles.item, selectedNumber === item.value && styles.selectedItem]}
-        onPress={() => handleNumberPress(item.value)}
-      >
-        <Text style={styles.itemText}>{item.value}</Text>
-      </TouchableOpacity>
+      <Text style={itemStyle} onPress={() => handleNumberSelect(item)}>
+        {item}
+      </Text>
     );
   };
+  const onViewableItemsChanged = useRef(({ viewableItems }) => {
+    if (viewableItems.length > 0) {
+      const centerItem = viewableItems[Math.floor(viewableItems.length / 2)];
+      setSelectedNumber(centerItem.item);
+    }
+  });
+  const getItemLayout = (_, index) => ({
+    length: ITEM_HEIGHT,
+    offset: ITEM_HEIGHT * index,
+    index,
+  });
 
   return (
     <View style={styles.container}>
-      <View style={styles.iconContainerLeft} >
-      <MyIcon />
+      <View style={styles.iconContainerLeft}>
+        <MyIcon />
       </View>
       <FlatList
-        data={numbers}
+        ref={flatListRef}
+        data={data}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.listContent}
+        keyExtractor={(item) => item.toString()}
+        getItemLayout={getItemLayout}
+        initialNumToRender={20}
         showsVerticalScrollIndicator={false}
+        style={{ flex: 1, width: windowWidth }}
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+        onViewableItemsChanged={onViewableItemsChanged.current}
       />
-      <View style={styles.iconContainer} >
-      <MyIcon/>
+      <View style={styles.iconContainer}>
+        <MyIcon />
       </View>
-      
-
-      </View>
+    </View>
   );
 };
 
@@ -57,35 +90,38 @@ const styles = StyleSheet.create({
     flex: 0,
     flexDirection: 'row',
     alignItems: 'flex-start',
+    justifyContent:'center',
 
     
 
   },
   iconContainer: {
+    position:'absolute',
+    right:90,
     justifyContent: 'center',
     alignItems: 'center',
     width: '20%',
-    backgroundColor: 'blue',
     transform: [{ rotate: '90deg' }],
     
 
 
   },
   iconContainerLeft: {
+    position:'absolute',
+    left:90,
     justifyContent: 'center',
     alignItems: 'center',
     width: '20%',
-    backgroundColor: 'green',
     transform: [{ rotate: '-90deg' }],
 
   },
   listContent: {
-    flexGrow: 3,
+    flexGrow: 1,
     alignItems: 'center',
 
   },
   item: {
-    padding: 5,
+    padding: 10,
   },
   itemText: {
     fontSize: 18,

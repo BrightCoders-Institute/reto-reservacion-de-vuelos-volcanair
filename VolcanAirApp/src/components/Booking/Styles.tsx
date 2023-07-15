@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   boton: {
     backgroundColor: '#2196F3',
-    borderRadius: 15,
+    borderRadius: 10,
     marginBottom: 30,
     borderWidth: 1,
   },
@@ -41,10 +41,13 @@ const styles = StyleSheet.create({
   },
 
   endboton: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    alignSelf: 'flex-end',
+    flex: 0,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   maincontainer: {
     width: '100%',
@@ -53,9 +56,16 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: '50%',
   },
+  botonfinish: {
+
+  },
+
+
+
+
+
 
   tamano: {
-    backgroundColor: 'red',
     alignItems: 'center',
 
 

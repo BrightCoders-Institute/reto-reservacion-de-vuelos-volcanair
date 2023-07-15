@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, SafeAreaView} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import styles from './Styles';
 import NumberDropDown from './Pasajeros/NumberDropDown';
