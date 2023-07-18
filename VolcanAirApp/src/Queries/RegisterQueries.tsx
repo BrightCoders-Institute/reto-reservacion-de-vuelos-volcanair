@@ -1,18 +1,21 @@
+import {Alert} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import { Dispatch } from 'react';
 
-export const userExist = (email:any, password:any, nombre:any) => {
-  firestore()
+
+export const userExist = async (email:string, password:string, nombre:string, signWithGoogle: boolean, navigator: Dispatch) => {
+    await firestore()
     .collection('users')
-    .where('mail', '==', email)
+    .where('email', '==', email)
     .get()
-    .then(querySnapshot => {
-      if (!querySnapshot.empty) {
-        console.log('Este correo ya está registrado');
-        
-      } else {
-        console.log('Este correo no está registrado');
-        registerMailFireBase(email,password, nombre);
+    .then(async (querySnapshot) => {
+      if(querySnapshot.docs.length>0){
+        navigator.navigate("MyFlights");
+      }else{
+        await registerMailFireBase(email,password, nombre, signWithGoogle);
+        Alert.alert("Account Created Succesfully", "Now, you can Sign In with your Google account");
+        navigator.navigate("MyFlights");
       }
     })
     .catch(error => {
@@ -21,12 +24,12 @@ export const userExist = (email:any, password:any, nombre:any) => {
 }
 
 
-const registerMailFireBase=(email:any, password:any, nombre:any)=>{
-  auth()
+const registerMailFireBase=async (email:string, password:string, nombre:string, signWithGoogle: boolean)=>{
+  await auth()
   .createUserWithEmailAndPassword(email, password)
   .then(() => {
+    register(nombre,email,password, signWithGoogle);
     console.log('Usuario creado!');
-    register(nombre,password);
   })
   .catch(error => {
     if (error.code === 'auth/email-already-in-use') {
@@ -40,10 +43,13 @@ const registerMailFireBase=(email:any, password:any, nombre:any)=>{
     console.error(error);
   });
 }
-const register =(nombre:any, password:any)=>{    
+
+const register =(nombre:string, email: string, password:string, signWithGoogle: boolean)=>{    
   firestore().collection('users').add({
     name: nombre,
+    email: email,
     password: password,
+    signWithGoogle: signWithGoogle
   })
   .then(() => {
     console.log('User added!');
