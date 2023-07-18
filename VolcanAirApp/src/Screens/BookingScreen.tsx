@@ -1,5 +1,5 @@
-import { View, Text, Button, SafeAreaView } from 'react-native'
-import React, { useState} from 'react'
+import {View, Text, Button, SafeAreaView} from 'react-native';
+import React, {useState} from 'react';
 import Pantalla1 from '../components/Booking/Pantalla1';
 import Pantalla2 from '../components/Booking/Pantalla2';
 import Pantalla3 from '../components/Booking/Pantalla3';
@@ -7,15 +7,13 @@ import Pantalla4 from '../components/Booking/Pantalla4';
 import Pantalla5 from '../components/Booking/Pantalla5';
 import styles from '../components/Booking/Styles';
 
-export default function BookingScreen({ navigation }):JSX.Element {
-
+export default function BookingScreen({navigation}): JSX.Element {
   const [currentScreen, setCurrentScreen] = useState('Screen1');
-  
 
   return (
     <SafeAreaView style={styles.bookingmain}>
       {currentScreen === 'Screen1' && (
-        <Screen1  navigation={navigation} setCurrentScreen={setCurrentScreen} />
+        <Screen1 navigation={navigation} setCurrentScreen={setCurrentScreen} />
       )}
       {currentScreen === 'Screen2' && (
         <Screen2 navigation={navigation} setCurrentScreen={setCurrentScreen} />
@@ -31,57 +29,44 @@ export default function BookingScreen({ navigation }):JSX.Element {
       )}
     </SafeAreaView>
   );
-  }
+}
 
-  function Screen1({ setCurrentScreen, navigation }) {
+function Screen1({setCurrentScreen, navigation}) {
   return (
     <View style={styles.maincontainer}>
-    <Pantalla1 setCurrentScreen={setCurrentScreen} navigation={navigation}/>
+      <Pantalla1 setCurrentScreen={setCurrentScreen} navigation={navigation} />
     </View>
   );
-  }
+}
 
-  function Screen2({ setCurrentScreen, navigation }) {
+function Screen2({setCurrentScreen, navigation}) {
   return (
     <View style={styles.maincontainer}>
-      <Pantalla2 setCurrentScreen={setCurrentScreen} navigation={navigation}/>
+      <Pantalla2 setCurrentScreen={setCurrentScreen} navigation={navigation} />
     </View>
   );
-  }
+}
 
-  function Screen3({ setCurrentScreen, navigation }) {
+function Screen3({setCurrentScreen, navigation}) {
   return (
     <View style={styles.maincontainer}>
-      <Pantalla3 setCurrentScreen={setCurrentScreen} navigation={navigation}/>
+      <Pantalla3 setCurrentScreen={setCurrentScreen} navigation={navigation} />
     </View>
-
-    
-    
   );
-  }
-  function Screen4({ setCurrentScreen, navigation }) {
-    return (
-      <View style={styles.maincontainer}>
-        <Pantalla4 setCurrentScreen={setCurrentScreen} navigation={navigation}/>
-      </View>
-      
-    );
-    }
-  
-    function Screen5({ setCurrentScreen, navigation }) {
+}
+function Screen4({setCurrentScreen, navigation}) {
+  return (
+    <View style={styles.maincontainer}>
+      <Pantalla4 setCurrentScreen={setCurrentScreen} navigation={navigation} />
+    </View>
+  );
+}
 
-    return (
-      <View style={styles.maincontainer}>
-           <Pantalla5 navigation={navigation}/>
-      </View>
-   
-   
-    );
-    };
-    
+function Screen5({setCurrentScreen, navigation}) {
+  return (
+    <View style={styles.maincontainer}>
+      <Pantalla5 navigation={navigation} />
+    </View>
+  );
+}
 
-
-    /*<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>BookingScreen</Text>
-      <Button title='Go to My Flights' onPress={() => navigation.navigate('MyFlights')} />
-    </View>*/

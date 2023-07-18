@@ -1,17 +1,17 @@
+import React from 'react';
+import {View, Text} from 'react-native';
+import {style} from './style';
+import MyIcon from './MyIcon';
 
-import React from "react";
-import { View, Text } from "react-native";
-import { style } from "./style";
-import MyIcon from "./MyIcon";
-
-
-const Destino =()=>{
-  return(
-    <View >
-      <View >
+const Destino = () => {
+  return (
+    <View>
+      <View>
         <View style={style.names}>
           <Text style={style.originCity}>COl</Text>
-          <View style={style.icon}><MyIcon/></View>
+          <View style={style.icon}>
+            <MyIcon />
+          </View>
           <Text style={style.codeReservation}>GDL</Text>
         </View>
       </View>

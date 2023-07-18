@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {ImageBackground, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   boton: {
@@ -56,20 +56,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: '50%',
   },
-  botonfinish: {
-
-  },
-
-
-
-
-
-
-  tamano: {
-    alignItems: 'center',
-
-
-  }
 });
 
 export default styles;

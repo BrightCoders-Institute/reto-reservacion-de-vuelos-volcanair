@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './Styles';
 import Destino from './Destino/Destino';
 
-export default function Pantalla1({navigation, setCurrentScreen}): JSX.Element {
+export default function Pantalla1({setCurrentScreen}): JSX.Element {
   return (
     <View style={styles.container}>
       <Destino />
