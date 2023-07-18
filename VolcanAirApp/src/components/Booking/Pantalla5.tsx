@@ -1,9 +1,17 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, { Dispatch } from 'react';
 import styles from './Styles';
 import Destino from './Destino/Destino';
+import { Flight } from '../../Schemas/Flight';
 
-export default function Pantalla5({navigation}): JSX.Element {
+type Screen5Props = {
+  dataFlight: Flight;
+  navigation: any;
+}
+
+export default function Pantalla5({dataFlight, navigation}: Screen5Props): JSX.Element {
+  console.log(dataFlight);
+  
   return (
     <View style={styles.endcontainer}>
       <View style={styles.content}>

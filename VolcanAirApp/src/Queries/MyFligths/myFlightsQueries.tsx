@@ -4,6 +4,7 @@ import { AuthContext } from '../../components/AuthContex';
 
 type UserData = {
   [key: string]: any; // Tipo genérico para userData
+  
 };
 
 const myFlightsQueries = async (email:string, setData: Dispatch) => {

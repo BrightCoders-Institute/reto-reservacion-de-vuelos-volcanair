@@ -1,8 +1,10 @@
 import {View} from 'react-native';
 import {Picker} from 'react-native-wheel-pick';
-import React, {useState} from 'react';
+import React, {Dispatch, useState} from 'react';
 import Arrow from './Arrow';
 import {StyleSheet, Text} from 'react-native';
+import { Flight } from '../../../Schemas/Flight';
+
 
 export const PassengersSelector = () => {
   const [passenger, setPassenger] = useState(1);
