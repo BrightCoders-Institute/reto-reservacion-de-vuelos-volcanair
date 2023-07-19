@@ -12,10 +12,11 @@ type Screen1Props = {
 }
 
 export default function Pantalla1({ setCurrentScreen, setDataFlight, dataFlight }: Screen1Props): JSX.Element {
-  const countries = ["Colima", "Guadalajara", "Torreon", "CDMX"];
+  const countries = ["Colima", "Guadalajara", "Torreon", "CDMX", "Tijuana","Chiapas"];
+  const countriesCodes = ["COL", "GDL", "TOR", "CMX", "TIJ", "CHP"];
   return (
     <View style={styles.container}>
-      <Destino />
+      <Destino dataFlight={dataFlight}/>
 
       <Text style={styles.text}>Where are you now?</Text>
 
@@ -27,7 +28,7 @@ export default function Pantalla1({ setCurrentScreen, setDataFlight, dataFlight 
             ...dataFlight,
             origin_city: {
               name: selectedItem,
-              code: "CODE"
+              code: countriesCodes[index]
             }
           })
         }}

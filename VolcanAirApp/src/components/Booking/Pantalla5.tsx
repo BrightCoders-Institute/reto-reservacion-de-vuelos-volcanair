@@ -15,7 +15,7 @@ export default function Pantalla5({dataFlight, navigation}: Screen5Props): JSX.E
   return (
     <View style={styles.endcontainer}>
       <View style={styles.content}>
-        <Destino />
+        <Destino dataFlight={dataFlight}/>
 
         <Text style={styles.text}>Your Request was received </Text>
       </View>

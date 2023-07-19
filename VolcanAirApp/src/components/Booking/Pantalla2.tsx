@@ -14,10 +14,11 @@ type Screen2Props = {
 // Screen2Props
 export default function Pantalla2({setCurrentScreen, dataFlight, setDataFlight}: Screen2Props): JSX.Element {
   console.log(JSON.stringify(dataFlight));
-  const countries = ["Colima", "Guadalajara", "Torreon", "CDMX"];
+  const countries = ["Colima", "Guadalajara", "Torreon", "CDMX", "Tijuana","Chiapas"];
+  const countriesCodes = ["COL", "GDL", "TOR", "CMX", "TIJ", "CHP"];
   return (
     <View style={styles.container}>
-      <Destino />
+      <Destino dataFlight={dataFlight} />
 
       <Text style={styles.text}>Where will you be flying to?</Text>
 
@@ -30,7 +31,7 @@ export default function Pantalla2({setCurrentScreen, dataFlight, setDataFlight}:
             ...dataFlight,
             destination_city: {
               name: selectedItem,
-              code: "CODE"
+              code: countriesCodes[index]
             }
           })
         }}

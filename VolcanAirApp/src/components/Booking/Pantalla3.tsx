@@ -14,7 +14,7 @@ type Screen3Props = {
 export default function Pantalla3({setCurrentScreen, dataFlight, setDataFlight}: Screen3Props): JSX.Element {
   return (
     <View style={styles.container}>
-      <Destino />
+      <Destino dataFlight={dataFlight}/>
       <Text style={styles.text}>Selec date</Text>
       <Calendario dataFlight={dataFlight} setDataFlight={setDataFlight}/>
       <View>

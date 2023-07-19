@@ -6,7 +6,10 @@ import {StyleSheet, Text} from 'react-native';
 import { Flight } from '../../../Schemas/Flight';
 
 
-export const PassengersSelector = () => {
+type propsPassengersSelector={
+  setNoPassengers: Dispatch<number>;
+}
+export const PassengersSelector = ({setNoPassengers}:propsPassengersSelector) => {
   const [passenger, setPassenger] = useState(1);
   const data = Array.from({length: 6}, (_, index) => index + 1);
   const initialScrollIndex = passenger - 1;
@@ -25,6 +28,7 @@ export const PassengersSelector = () => {
             pickerData={data}
             onValueChange={(value: string) => {
               setPassenger(parseInt(value));
+              setNoPassengers(parseInt(value));
             }}
             textStyle={styles.pickerText}
             initialScrollIndex={initialScrollIndex}
