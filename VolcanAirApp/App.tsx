@@ -1,16 +1,28 @@
-import React from 'react';
-import LoginScreen from './src/components/LoginScreen';
-import {
-  SafeAreaView,
-} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native'
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import LoginScreens from './src/Screens/LoginScreen';
+import MyFlights from './src/Screens/MyFlights';
+import BookingScreen from './src/Screens/BookingScreen';
+import SignUpScreen from './src/Screens/SignUpScreen';
+import { firebase } from '@react-native-firebase/auth';
 
 
+import { AuthProvider } from './src/components/AuthContex';
+
+const Stack= createNativeStackNavigator();
 function App(): JSX.Element {
-
   return (
-    <SafeAreaView >
-      <LoginScreen/>
-    </SafeAreaView>
+      <AuthProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName='SignUp'>
+            <Stack.Screen name='Login' component={LoginScreens} options={{headerShown: false}} />
+            <Stack.Screen name='MyFlights' component={MyFlights} options={{headerShown: false}}/>
+            <Stack.Screen name='Booking' component={BookingScreen} options={{headerShown: false}}/>
+            <Stack.Screen name='SignUp' component={SignUpScreen} options={{headerShown: false}}/>
+          </Stack.Navigator>
+        </NavigationContainer>   
+      </AuthProvider>
   );
 }
 
