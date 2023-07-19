@@ -15,14 +15,6 @@ type Screen4Props = {
 export default function Pantalla4({setCurrentScreen, dataFlight, setDataFlight}:Screen4Props): JSX.Element {
   const { user } = useContext(AuthContext);
   
-  const formatDate = (timestamp: any) => {
-    const date = timestamp.toDate();
-    const day = date.getDate();
-    const month = date.toLocaleString('default', { month: 'long' }); // Obtener el nombre del mes
-    const year = date.getFullYear();
-    // Formatear la fecha como una cadena escrita
-    return `${day} de ${month} de ${year}`;
-  }
   return (
     <View style={styles.container}>
       <Destino dataFlight={dataFlight}/>
@@ -37,10 +29,6 @@ export default function Pantalla4({setCurrentScreen, dataFlight, setDataFlight}:
           onPress={async () => {
 
             await updateFlighs(user?.email, dataFlight);
-
-            console.log(dataFlight);
-            
-
             setCurrentScreen(5)
             }}>
           <Text style={styles.botonText}>Next</Text>
