@@ -23,7 +23,6 @@ export default function Pantalla1({ setCurrentScreen, setDataFlight, dataFlight 
       <SelectDropDown
         data={countries}
         onSelect={(selectedItem, index) => {
-          console.log(selectedItem);
           setDataFlight({
             ...dataFlight,
             origin_city: {

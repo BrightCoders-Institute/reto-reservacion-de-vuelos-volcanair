@@ -8,6 +8,7 @@ type DestinoProps = {
   dataFlight: Flight;
 }
 const Destino = ({dataFlight}:DestinoProps) => {
+
   return (
     <View>
       <View>
@@ -27,7 +28,7 @@ const Destino = ({dataFlight}:DestinoProps) => {
       </View>
       <View style={style.lineaBlack}>
         <View style={style.containertLineaBLack}>
-          <Text style={style.date}>{dataFlight.date}</Text>
+          <Text style={style.date}>date</Text>
           <Text style={style.passengers}>{dataFlight.no_passengers} passengers</Text>
         </View>
       </View>

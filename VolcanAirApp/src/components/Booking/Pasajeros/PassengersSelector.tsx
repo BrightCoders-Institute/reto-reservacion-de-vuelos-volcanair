@@ -1,19 +1,28 @@
 import {View} from 'react-native';
 import {Picker} from 'react-native-wheel-pick';
-import React, {Dispatch, useState} from 'react';
+import React, {Dispatch, useEffect, useState} from 'react';
 import Arrow from './Arrow';
 import {StyleSheet, Text} from 'react-native';
 import { Flight } from '../../../Schemas/Flight';
 
 
 type propsPassengersSelector={
-  setNoPassengers: Dispatch<number>;
+  dataFlight: Flight;
+  setDataFlight: Dispatch<Flight>;
 }
-export const PassengersSelector = ({setNoPassengers}:propsPassengersSelector) => {
+export const PassengersSelector = ({dataFlight, setDataFlight}:propsPassengersSelector) => {
   const [passenger, setPassenger] = useState(1);
   const data = Array.from({length: 6}, (_, index) => index + 1);
-  const initialScrollIndex = passenger - 1;
+  const initialScrollIndex = 0;
 
+  useEffect(() => {
+    setDataFlight({
+      ...dataFlight,
+      no_passengers: passenger
+    })
+  
+  }, [passenger]);
+  
   return (
     <View style={styles.container}>
       <View>
@@ -28,7 +37,6 @@ export const PassengersSelector = ({setNoPassengers}:propsPassengersSelector) =>
             pickerData={data}
             onValueChange={(value: string) => {
               setPassenger(parseInt(value));
-              setNoPassengers(parseInt(value));
             }}
             textStyle={styles.pickerText}
             initialScrollIndex={initialScrollIndex}

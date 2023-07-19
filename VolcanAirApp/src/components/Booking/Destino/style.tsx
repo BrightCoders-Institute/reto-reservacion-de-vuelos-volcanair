@@ -27,7 +27,7 @@ export const style = StyleSheet.create({
   containetNames: {
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(0, 0, 0, 0.2)',
+    borderBottomColor: 'rgba(0, 0, 0, 0.8)',
     paddingVertical: 7,
   },
   lineTransparent: {
@@ -35,14 +35,14 @@ export const style = StyleSheet.create({
   },
   destinityName: {
     flex: 1,
-    color: 'rgba(0, 0, 0, 0.2)',
-    fontSize: 10,
+    color: 'rgba(0, 0, 0, 1)',
+    fontSize: 13,
     textAlign: 'right',
   },
   originName: {
     flex: 1,
-    color: 'rgba(0, 0, 0, 0.2)',
-    fontSize: 10,
+    color: 'rgba(0, 0, 0, 1)',
+    fontSize: 13,
     textAlign: 'left',
   },
   //Fin de nombres

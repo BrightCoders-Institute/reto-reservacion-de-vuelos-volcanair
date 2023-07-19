@@ -40,7 +40,7 @@ const Calendario = ({dataFlight, setDataFlight}: CalendarProps) => {
                 setSelected(day.dateString);
                 setDataFlight({
                     ...dataFlight,
-                    date: day.dateString
+                    date: day.dateString    
                 });
 
             }}

@@ -1,10 +1,18 @@
 import { View, Text } from 'react-native';
 import React from 'react';
 import firestore from '@react-native-firebase/firestore';
-type dataFligths={
-  email:string
-}
-export default async function updateFlighs({email}:dataFligths) {
+import { Flight } from '../../Schemas/Flight';
+import { firebase } from '@react-native-firebase/auth';
+
+export default async function updateFlighs(email: string, dataFlight: Flight) {
+  // HACER UNA COPIA PARA MODIFICAR LA COPIA
+  dataFlight.date  = firebase.firestore.Timestamp.fromDate(new Date(dataFlight.date));
+  // const convertToTimestamp = () => {
+  //   const { dateString } = this.state;
+  //   const convertedTimestamp = new Date(dateString).getTime();
+  //   this.setState({ convertedTimestamp });
+  // }
+  
   const collectionRef = firestore().collection('users');
   try {
     const querySnapshot = await collectionRef.where('email', '==', email).get();
@@ -14,16 +22,7 @@ export default async function updateFlighs({email}:dataFligths) {
         const docRef = collectionRef.doc(documentSnapshot.id);
 
         docRef.update({
-          origin_city: {
-            code: '',
-            name: '',
-          },
-          destination_city: {
-            code: '',
-            name: '',
-          },
-          date: '',
-          no_passengers: 0,
+          flight_reservations : firestore.FieldValue.arrayUnion(dataFlight)
         });
       });
 

@@ -9,7 +9,7 @@ type flightProps={
 }
 
 type Flight = {
-    date: any;
+    date: Date;
     destination_city: City;
     origin_city: City;
     no_passengers: number;
@@ -20,7 +20,7 @@ type City={
     name: string;
 }
 
-const formatDate = (timestamp: any) => {
+  const formatDate = (timestamp: any) => {
   const date = timestamp.toDate();
   const day = date.getDate();
   const month = date.toLocaleString('default', { month: 'long' }); // Obtener el nombre del mes
